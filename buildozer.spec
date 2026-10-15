@@ -56,7 +56,7 @@ android.private_storage = True
 android.accept_sdk_license = True
 
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
 
 [buildozer]
 
@@ -65,3 +65,6 @@ log_level = 2
 
 # (int) Display warning if buildozer is run as root (0 = false, 1 = true)
 warn_on_root = 1
+
+
+
