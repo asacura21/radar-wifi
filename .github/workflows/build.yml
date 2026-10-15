@@ -17,7 +17,6 @@ jobs:
       with:
         python-version: '3.10'
 
-    # Acción oficial para configurar Java y el entorno de Android correctamente
     - name: Configurar Java (JDK 17)
       uses: actions/setup-java@v4
       with:
@@ -38,7 +37,16 @@ jobs:
         pip install --upgrade pip
         pip install --upgrade cython==0.29.36 buildozer
 
-    - name: Compilar APK con Buildozer
+    - name: Forzar descarga inicial y aceptación de licencias SDK
+      run: |
+        # Creamos la estructura inicial para que el sdkmanager pueda aceptar las licencias de forma no interactiva
+        buildozer -v android debug || true
+        ANDROID_SDK_DIR="$HOME/.buildozer/android/platform/android-sdk"
+        if [ -d "$ANDROID_SDK_DIR" ]; then
+          yes | "$ANDROID_SDK_DIR"/cmdline-tools/latest/bin/sdkmanager --licenses || true
+        fi
+
+    - name: Compilar APK con Buildozer (Definitivo)
       run: |
         buildozer -v android debug
 
