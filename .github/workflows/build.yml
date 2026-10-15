@@ -31,12 +31,6 @@ jobs:
         pip install --upgrade pip
         pip install --upgrade cython==0.29.36 buildozer
 
-    - name: Aceptar licencias de Android SDK
-      run: |
-        # Localizar el sdkmanager y aceptar licencias de forma forzosa
-        export ANDROID_HOME="$HOME/.buildozer/android/platform/android-sdk"
-        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
-
     - name: Compilar APK con Buildozer
       run: |
         buildozer -v android debug
